@@ -15,6 +15,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents()
     .AddAuthenticationStateSerialization();
 
+builder.Services.AddControllers(); // Web API
+
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
@@ -76,5 +78,7 @@ app.MapAdditionalIdentityEndpoints();
 
 // 마스터 DB 대상 초기화
 NotesTableBuilder.Run(app.Services, forMaster: true);
+
+app.MapControllers(); // Web API
 
 app.Run();
