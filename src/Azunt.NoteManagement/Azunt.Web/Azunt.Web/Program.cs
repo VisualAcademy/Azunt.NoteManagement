@@ -47,7 +47,7 @@ var defaultConnStr = builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddDependencyInjectionContainerForNoteApp(defaultConnStr, Azunt.Models.Enums.RepositoryMode.EfCore);
 builder.Services.AddTransient<NoteDbContextFactory>();
-builder.Services.AddScoped<INoteStorageService, LocalNoteStorageService>();
+builder.Services.AddScoped<INoteStorageService, NoOpNoteStorageService>();
 
 var app = builder.Build();
 

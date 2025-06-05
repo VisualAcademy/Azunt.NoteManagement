@@ -8,12 +8,12 @@ using System;
 
 namespace Azunt.Web.Components.Pages.Notes.Services
 {
-    public class AzureBlobStorageService : INoteStorageService
+    public class AzureBlobNoteStorageService : INoteStorageService
     {
         private readonly BlobContainerClient _containerClient;
         private readonly string _subFolder;
 
-        public AzureBlobStorageService(IConfiguration config, string subFolder = "notes")
+        public AzureBlobNoteStorageService(IConfiguration config, string subFolder = "notes")
         {
             _subFolder = subFolder;
 
