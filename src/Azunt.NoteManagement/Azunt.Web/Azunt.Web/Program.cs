@@ -1,11 +1,12 @@
+using Azunt.NoteManagement;
 using Azunt.Web.Client.Pages;
 using Azunt.Web.Components;
 using Azunt.Web.Components.Account;
+using Azunt.Web.Components.Pages.Notes.Services;
 using Azunt.Web.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Azunt.NoteManagement;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +47,7 @@ var defaultConnStr = builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddDependencyInjectionContainerForNoteApp(defaultConnStr, Azunt.Models.Enums.RepositoryMode.EfCore);
 builder.Services.AddTransient<NoteDbContextFactory>();
+builder.Services.AddScoped<INoteStorageService, LocalNoteStorageService>();
 
 var app = builder.Build();
 
