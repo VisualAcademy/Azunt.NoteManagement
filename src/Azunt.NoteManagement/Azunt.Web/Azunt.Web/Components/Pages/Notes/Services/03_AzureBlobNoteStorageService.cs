@@ -17,8 +17,8 @@ namespace Azunt.Web.Components.Pages.Notes.Services
         {
             _subFolder = subFolder;
 
-            var connStr = config["AzureBlobStorage:Default:ConnectionString"];
-            var containerName = config["AzureBlobStorage:Default:ContainerName"];
+            var connStr = config["AzureBlobStorage:Azunt:ConnectionString"];
+            var containerName = config["AzureBlobStorage:Azunt:ContainerName"];
 
             if (string.IsNullOrWhiteSpace(connStr) || string.IsNullOrWhiteSpace(containerName))
                 throw new InvalidOperationException("Azure Blob Storage configuration is missing.");
