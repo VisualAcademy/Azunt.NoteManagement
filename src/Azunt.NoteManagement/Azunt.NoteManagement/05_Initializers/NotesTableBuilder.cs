@@ -93,7 +93,7 @@ namespace Azunt.NoteManagement
                     var cmdCreate = new SqlCommand(@"
                         CREATE TABLE [dbo].[Notes] (
                             [Id] BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,                   -- 고유 ID
-                            [Active] BIT NOT NULL DEFAULT(1),                                -- 활성 상태
+                            [Active] BIT NULL DEFAULT(1),                                    -- 활성 상태
                             [IsDeleted] BIT NOT NULL DEFAULT(0),                             -- 소프트 삭제
                             [Created] DATETIMEOFFSET(7) NOT NULL DEFAULT SYSDATETIMEOFFSET(),-- 생성 일시
                             [CreatedBy] NVARCHAR(255) NULL,                                  -- 생성자
@@ -120,6 +120,7 @@ namespace Azunt.NoteManagement
                 var expectedColumns = new Dictionary<string, string>
                 {
                     // All columns from the Alls table
+                    ["Active"] = "BIT NULL DEFAULT(1)",
                     ["ParentId"] = "BIGINT NULL",
                     ["ParentKey"] = "NVARCHAR(255) NULL",
                     ["CreatedBy"] = "NVARCHAR(255) NULL",
