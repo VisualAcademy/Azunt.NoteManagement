@@ -44,14 +44,14 @@ builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSe
 
 
 
-#region NoteManagement
-var defaultConnStr = builder.Configuration.GetConnectionString("DefaultConnection")
-?? throw new InvalidOperationException("DefaultConnection is missing in configuration.");
 
-builder.Services.AddDependencyInjectionContainerForNoteApp(defaultConnStr, Azunt.Models.Enums.RepositoryMode.EfCore);
+#region NoteManagement
+builder.Services.AddDependencyInjectionContainerForNoteApp(connectionString, Azunt.Models.Enums.RepositoryMode.EfCore);
 builder.Services.AddTransient<NoteDbContextFactory>();
 builder.Services.AddScoped<INoteStorageService, NoOpNoteStorageService>();
 #endregion
+
+
 
 
 var app = builder.Build();
