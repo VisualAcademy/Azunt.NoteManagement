@@ -69,7 +69,7 @@ public partial class ModalForm : ComponentBase
                 Active = ModelSender.Active,
                 Created = ModelSender.Created,
                 CreatedBy = ModelSender.CreatedBy,
-                FileName = ModelSender.FileName
+                FileName = ModelSender.FileName                
             };
         }
         else
