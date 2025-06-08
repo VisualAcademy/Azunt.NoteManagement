@@ -1,4 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -60,6 +62,41 @@ namespace Azunt.NoteManagement
             checkCommand.Parameters.AddWithValue("@ColumnName", columnName);
 
             return (int)checkCommand.ExecuteScalar() > 0;
+        }
+
+        /// <summary>
+        /// 서비스 프로바이더 기반으로 실행할 수 있는 편의 메서드
+        /// </summary>
+        public static void Run(IServiceProvider services, bool forMaster, string? optionalConnectionString = null)
+        {
+            try
+            {
+                var logger = services.GetRequiredService<ILogger<NoteTableEnhancer>>();
+                var config = services.GetRequiredService<IConfiguration>();
+
+                string connectionString;
+
+                if (!string.IsNullOrWhiteSpace(optionalConnectionString))
+                {
+                    connectionString = optionalConnectionString;
+                }
+                else
+                {
+                    var tempConnectionString = config.GetConnectionString("DefaultConnection");
+                    if (string.IsNullOrEmpty(tempConnectionString))
+                        throw new InvalidOperationException("DefaultConnection is not configured in appsettings.json.");
+
+                    connectionString = tempConnectionString;
+                }
+
+                var enhancer = new NoteTableEnhancer(connectionString, logger);
+                enhancer.EnhanceNotesTable();
+            }
+            catch (Exception ex)
+            {
+                var fallbackLogger = services.GetService<ILogger<NoteTableEnhancer>>();
+                fallbackLogger?.LogError(ex, "Error while enhancing Notes table schema.");
+            }
         }
     }
 }
