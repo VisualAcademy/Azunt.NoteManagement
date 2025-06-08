@@ -7,8 +7,11 @@ using Azunt.Web.Data;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddFluentUIComponents();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

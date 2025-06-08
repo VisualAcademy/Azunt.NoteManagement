@@ -30,7 +30,7 @@ public partial class NoteManager : ComponentBase
     #endregion
 
     #region Injectors
-    [Inject] public NavigationManager NavigationManagerInjector { get; set; } = null!;
+    [Inject] public NavigationManager Nav { get; set; } = null!;
     [Inject] public IJSRuntime JSRuntimeInjector { get; set; } = null!;
     [Inject] public INoteRepository RepositoryReference { get; set; } = null!;
     [Inject] public IConfiguration Configuration { get; set; } = null!;
@@ -39,6 +39,11 @@ public partial class NoteManager : ComponentBase
     [Inject] public AuthenticationStateProvider AuthenticationStateProviderRef { get; set; } = null!;
     [Inject] private INoteStorageService NoteStorage { get; set; } = null!;
     #endregion
+
+    private void ExportExcel()
+    {
+        Nav.NavigateTo("/api/NoteExport/Excel", forceLoad: true);
+    }
 
     #region Properties
     public string EditorFormTitle { get; set; } = "CREATE";
