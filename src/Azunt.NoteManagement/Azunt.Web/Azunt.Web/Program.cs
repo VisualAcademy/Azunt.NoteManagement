@@ -11,6 +11,11 @@ using Microsoft.FluentUI.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// HttpClient 등록
+// HttpClient 인스턴스를 DI(Dependency Injection) 컨테이너에 등록하여 재사용성을 높임
+builder.Services.AddHttpClient();
+
+// Fluent UI Blazor library add: 반드시 AddHttpClient() 확장 메서드 다음에 위치할 것
 builder.Services.AddFluentUIComponents();
 
 // Add services to the container.
