@@ -40,11 +40,6 @@ public partial class NoteManager : ComponentBase
     [Inject] private INoteStorageService NoteStorage { get; set; } = null!;
     #endregion
 
-    private void ExportExcel()
-    {
-        Nav.NavigateTo("/api/NoteExport/Excel", forceLoad: true);
-    }
-
     #region Properties
     public string EditorFormTitle { get; set; } = "CREATE";
     public ModalForm EditorFormReference { get; set; } = null!;
@@ -254,5 +249,10 @@ public partial class NoteManager : ComponentBase
     {
         await RepositoryReference.MoveDownAsync(id);
         await DisplayData();
+    }
+
+    private void ExportExcel()
+    {
+        Nav.NavigateTo("/api/NoteExport/Excel", forceLoad: true);
     }
 }
