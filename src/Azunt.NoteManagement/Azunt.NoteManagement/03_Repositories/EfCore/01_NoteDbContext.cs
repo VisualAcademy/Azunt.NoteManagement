@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azunt.NoteManagement.Models.Configurations;
+using Microsoft.EntityFrameworkCore;
 
 namespace Azunt.NoteManagement
 {
@@ -12,9 +13,11 @@ namespace Azunt.NoteManagement
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Note>()
-                .Property(m => m.Created)
-                .HasDefaultValueSql("GetDate()");
+            // 직접 속성 구성
+            // modelBuilder.Entity<Note>().Property(m => m.Created).HasDefaultValueSql("GetDate()");
+
+            // NoteConfiguration 클래스 적용
+            modelBuilder.ApplyConfiguration(new NoteConfiguration());
         }
 
         public DbSet<Note> Notes { get; set; } = null!;
